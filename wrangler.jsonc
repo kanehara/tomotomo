@@ -1,0 +1,20 @@
+{
+	"name": "tomotomo",
+	"main": "./worker/index.ts",
+	"compatibility_date": "2026-02-12",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"assets": {
+		"not_found_handling": "none",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "tomotomo",
+			"database_id": "ae6a175d-7ad1-447f-be95-0067015a2283",
+			"remote": true
+		}
+	]
+}
