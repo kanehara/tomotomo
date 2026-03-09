@@ -22,6 +22,7 @@ export async function GET(
     description: event.description,
     participant_limit: event.participant_limit,
     line_group_url: event.line_group_url,
+    start_datetime: event.start_datetime,
     current_rsvp_count,
     participants,
   });

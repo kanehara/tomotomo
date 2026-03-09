@@ -14,6 +14,7 @@ interface EventData {
   description: string | null;
   participant_limit: number | null;
   line_group_url: string | null;
+  start_datetime: string | null;
   current_rsvp_count: number;
   participants: Participant[];
 }
@@ -140,6 +141,16 @@ export default function EventPage({
 
           {/* Event header */}
           <h1 className="text-2xl font-bold mb-1">{event!.name}</h1>
+
+          {event!.start_datetime && (
+            <p className="text-sm text-gray-500 mb-1">
+              🗓️{" "}
+              {new Date(event!.start_datetime).toLocaleString(
+                locale === "ja" ? "ja-JP" : "en-US",
+                { dateStyle: "long", timeStyle: "short" }
+              )}
+            </p>
+          )}
 
           {event!.description && (
             <p className="text-gray-600 mb-4">{event!.description}</p>

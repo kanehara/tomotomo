@@ -14,11 +14,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { name, description, participant_limit, line_group_url } = body as {
+  const { name, description, participant_limit, line_group_url, start_datetime } = body as {
     name?: unknown;
     description?: unknown;
     participant_limit?: unknown;
     line_group_url?: unknown;
+    start_datetime?: unknown;
   };
 
   // Validate name
@@ -61,6 +62,16 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Validate start_datetime (ISO 8601 string or null)
+  if (start_datetime !== null && start_datetime !== undefined) {
+    if (typeof start_datetime !== "string" || isNaN(Date.parse(start_datetime))) {
+      return NextResponse.json(
+        { error: "start_datetime must be a valid ISO 8601 date-time string" },
+        { status: 400 }
+      );
+    }
+  }
+
   // Generate unique slug (retry on collision)
   let slug: string;
   let attempts = 0;
@@ -87,6 +98,10 @@ export async function POST(request: NextRequest) {
       line_group_url:
         typeof line_group_url === "string" && line_group_url.trim()
           ? line_group_url.trim()
+          : null,
+      start_datetime:
+        typeof start_datetime === "string" && start_datetime.trim()
+          ? start_datetime.trim()
           : null,
     });
   } catch (err) {

@@ -7,6 +7,7 @@ export interface Event {
   description: string | null;
   participant_limit: number | null;
   line_group_url: string | null;
+  start_datetime: string | null;
   created_at: string;
 }
 
@@ -70,10 +71,11 @@ export async function insertEvent(event: {
   description: string | null;
   participant_limit: number | null;
   line_group_url: string | null;
+  start_datetime: string | null;
 }): Promise<void> {
   await env.DB.prepare(
-    `INSERT INTO events (id, slug, name, description, participant_limit, line_group_url)
-     VALUES (?, ?, ?, ?, ?, ?)`
+    `INSERT INTO events (id, slug, name, description, participant_limit, line_group_url, start_datetime)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`
   )
     .bind(
       event.id,
@@ -81,7 +83,8 @@ export async function insertEvent(event: {
       event.name,
       event.description,
       event.participant_limit,
-      event.line_group_url
+      event.line_group_url,
+      event.start_datetime
     )
     .run();
 }

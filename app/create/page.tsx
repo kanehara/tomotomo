@@ -24,6 +24,7 @@ export default function CreatePage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [participantLimit, setParticipantLimit] = useState("");
+  const [startDatetime, setStartDatetime] = useState("");
   const [lineGroupUrl, setLineGroupUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +40,7 @@ export default function CreatePage() {
         name: name.trim(),
         description: description.trim() || null,
         participant_limit: participantLimit ? parseInt(participantLimit, 10) : null,
+        start_datetime: startDatetime || null,
         line_group_url: lineGroupUrl.trim() || null,
       };
 
@@ -128,6 +130,7 @@ export default function CreatePage() {
                 setName("");
                 setDescription("");
                 setParticipantLimit("");
+                setStartDatetime("");
                 setLineGroupUrl("");
               }}
             >
@@ -178,6 +181,20 @@ export default function CreatePage() {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder={tc.descriptionPlaceholder}
                 className={inputCls + " resize-y min-h-[80px]"}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="start-datetime" className={labelCls}>
+                {tc.startDatetime}{" "}
+                <span className="text-xs text-gray-400">({tc.startDatetimeHint})</span>
+              </label>
+              <input
+                id="start-datetime"
+                type="datetime-local"
+                value={startDatetime}
+                onChange={(e) => setStartDatetime(e.target.value)}
+                className={inputCls}
               />
             </div>
 

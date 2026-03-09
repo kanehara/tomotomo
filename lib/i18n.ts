@@ -24,6 +24,8 @@ export const translations = {
       description: "Description",
       participantLimit: "Participant Limit",
       participantLimitHint: "leave blank for unlimited",
+      startDatetime: "Event Date & Time",
+      startDatetimeHint: "optional",
       lineGroupUrl: "LINE Group Invite URL",
       lineGroupUrlHint: "optional — shown after RSVP",
       lineGroupUrlDisclaimer:
@@ -99,6 +101,8 @@ export const translations = {
       description: "説明",
       participantLimit: "参加者の上限",
       participantLimitHint: "空欄にすると無制限",
+      startDatetime: "開催日時",
+      startDatetimeHint: "任意",
       lineGroupUrl: "LINEグループ招待URL",
       lineGroupUrlHint: "任意 — 参加登録後に表示",
       lineGroupUrlDisclaimer:
