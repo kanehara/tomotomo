@@ -13,6 +13,7 @@ interface EventData {
   name: string;
   description: string | null;
   participant_limit: number | null;
+  line_group_url: string | null;
   current_rsvp_count: number;
   participants: Participant[];
 }
@@ -160,25 +161,14 @@ export default function EventPage({
           {/* ── RSVP area: success | full | form ──────────────────────────── */}
           {rsvpResult ? (
             /* Success — stays on page, form replaced by confirmation + LINE link */
-            <div className="pt-5 pb-2 border-t border-gray-200 mt-1">
-              <div className="text-3xl mb-1.5">🎉</div>
-              <p className="text-base text-green-700 font-medium mb-3">
+            <div className="pt-6 border-t border-gray-200">
+              <p className="text-base text-green-700 font-medium">
                 {locale === "ja" ? (
                   <><strong>{event!.name}</strong>{te.success.successFor}</>
                 ) : (
                   <>{te.success.successFor} <strong>{event!.name}</strong>.</>
                 )}
               </p>
-              {rsvpResult.line_group_url && (
-                <a
-                  href={rsvpResult.line_group_url}
-                  className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-lg text-lg font-semibold bg-[#06C755] text-white hover:bg-[#05a048] transition-colors mt-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {te.success.joinLine}
-                </a>
-              )}
             </div>
           ) : isFull ? (
             <div className="p-3 px-4 rounded-lg mb-2 text-sm bg-red-50 border border-red-200 text-red-700">
@@ -239,6 +229,20 @@ export default function EventPage({
               </ol>
             )}
           </div>
+
+          {/* ── LINE group link (always visible) ──────────────────────────── */}
+          {event!.line_group_url && (
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <a
+                href={event!.line_group_url}
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-lg text-lg font-semibold bg-[#06C755] text-white hover:bg-[#05a048] transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {te.success.joinLine}
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </>
