@@ -70,6 +70,10 @@ export const translations = {
         failedRsvp: "Failed to RSVP. Please try again.",
         failedLoad: "Failed to load event",
       },
+      participants: {
+        title: "Attendees",
+        empty: "No one has RSVPed yet — be the first!",
+      },
     },
   },
   ja: {
@@ -143,6 +147,10 @@ export const translations = {
           "ネットワークエラーが発生しました。再試行してください。",
         failedRsvp: "参加登録に失敗しました。再試行してください。",
         failedLoad: "イベントの読み込みに失敗しました",
+      },
+      participants: {
+        title: "参加者",
+        empty: "まだ参加登録者がいません — 最初に登録しましょう！",
       },
     },
   },

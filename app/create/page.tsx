@@ -9,6 +9,14 @@ interface CreateResult {
   qr_url: string;
 }
 
+const inputCls =
+  "w-full px-3 py-2 border border-gray-300 rounded-lg text-base outline-none focus:border-blue-600 focus:ring-[3px] focus:ring-blue-600/15 transition-colors";
+const labelCls = "block text-sm font-medium mb-1.5 text-gray-700";
+const btnPrimary =
+  "inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-base font-medium bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer border-0";
+const navToggleCls =
+  "border border-gray-300 rounded-md px-2.5 py-1 text-xs text-gray-700 cursor-pointer hover:bg-gray-100 hover:border-gray-400 transition-colors";
+
 export default function CreatePage() {
   const { t, toggleLocale } = useLocale();
   const tc = t.create;
@@ -63,27 +71,27 @@ export default function CreatePage() {
   if (result) {
     return (
       <>
-        <nav className="nav">
-          <Link href="/" className="nav-brand">{t.nav.brand}</Link>
-          <button className="lang-toggle" onClick={toggleLocale}>
-            {t.langToggle}
-          </button>
+        <nav className="flex items-center justify-between w-full max-w-[540px] mb-8">
+          <Link href="/" className="text-xl font-bold text-gray-900">{t.nav.brand}</Link>
+          <button className={navToggleCls} onClick={toggleLocale}>{t.langToggle}</button>
         </nav>
-        <div className="container">
-          <div className="card">
-            <div className="success-state">
-              <div className="success-icon">✅</div>
-              <h1 style={{ marginBottom: "0.5rem" }}>{tc.success.title}</h1>
-              <p>{tc.success.subtitle}</p>
+
+        <div className="w-full max-w-[540px]">
+          <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+            {/* Success header */}
+            <div className="text-center py-4 mb-4">
+              <div className="text-5xl mb-2">✅</div>
+              <h1 className="text-2xl font-bold mb-1">{tc.success.title}</h1>
+              <p className="text-gray-600">{tc.success.subtitle}</p>
             </div>
 
-            <div className="form-group">
-              <label>{tc.success.eventUrlLabel}</label>
-              <div className="event-url-box">
-                <span style={{ flex: 1 }}>{fullEventUrl}</span>
+            {/* Event URL */}
+            <div className="mb-4">
+              <label className={labelCls}>{tc.success.eventUrlLabel}</label>
+              <div className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 font-mono text-sm break-all mb-3">
+                <span className="flex-1">{fullEventUrl}</span>
                 <button
-                  className="btn btn-primary"
-                  style={{ padding: "0.25rem 0.75rem", fontSize: "0.8125rem" }}
+                  className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer border-0 shrink-0"
                   onClick={() => navigator.clipboard?.writeText(fullEventUrl)}
                 >
                   {tc.success.copyButton}
@@ -91,33 +99,30 @@ export default function CreatePage() {
               </div>
               <a
                 href={result.event_url}
-                className="btn btn-primary"
-                style={{ width: "100%", marginBottom: "0.5rem" }}
+                className="flex items-center justify-center px-5 py-2.5 rounded-lg text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors mb-2"
               >
                 {tc.success.openButton}
               </a>
             </div>
 
-            <div className="qr-section">
-              <label style={{ display: "block", marginBottom: "0.5rem" }}>
-                {tc.success.qrLabel}
-              </label>
+            {/* QR code */}
+            <div className="text-center mt-4">
+              <label className={labelCls + " mb-2"}>{tc.success.qrLabel}</label>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={result.qr_url}
                 alt="Event QR code"
                 width={200}
                 height={200}
+                className="max-w-[200px] border border-gray-200 rounded-lg p-2 bg-white mx-auto"
               />
-              <p className="hint" style={{ marginTop: "0.5rem" }}>
-                {tc.success.qrHint}
-              </p>
+              <p className="text-xs text-gray-400 mt-2">{tc.success.qrHint}</p>
             </div>
           </div>
 
-          <div style={{ textAlign: "center" }}>
+          <div className="text-center">
             <button
-              className="btn btn-primary"
+              className={btnPrimary}
               onClick={() => {
                 setResult(null);
                 setName("");
@@ -136,23 +141,24 @@ export default function CreatePage() {
 
   return (
     <>
-      <nav className="nav">
-        <Link href="/" className="nav-brand">{t.nav.brand}</Link>
-        <button className="lang-toggle" onClick={toggleLocale}>
-          {t.langToggle}
-        </button>
+      <nav className="flex items-center justify-between w-full max-w-[540px] mb-8">
+        <Link href="/" className="text-xl font-bold text-gray-900">{t.nav.brand}</Link>
+        <button className={navToggleCls} onClick={toggleLocale}>{t.langToggle}</button>
       </nav>
-      <div className="container">
-        <div className="card">
-          <h1 style={{ marginBottom: "1.5rem" }}>{tc.title}</h1>
+
+      <div className="w-full max-w-[540px]">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+          <h1 className="text-2xl font-bold mb-6">{tc.title}</h1>
 
           {error && (
-            <div className="alert alert-error">{error}</div>
+            <div className="p-3 px-4 rounded-lg mb-4 text-sm bg-red-50 border border-red-200 text-red-700">
+              {error}
+            </div>
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">{tc.eventName} *</label>
+            <div className="mb-4">
+              <label htmlFor="name" className={labelCls}>{tc.eventName} *</label>
               <input
                 id="name"
                 type="text"
@@ -160,23 +166,25 @@ export default function CreatePage() {
                 onChange={(e) => setName(e.target.value)}
                 placeholder={tc.namePlaceholder}
                 required
+                className={inputCls}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="description">{tc.description}</label>
+            <div className="mb-4">
+              <label htmlFor="description" className={labelCls}>{tc.description}</label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder={tc.descriptionPlaceholder}
+                className={inputCls + " resize-y min-h-[80px]"}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="limit">
+            <div className="mb-4">
+              <label htmlFor="limit" className={labelCls}>
                 {tc.participantLimit}{" "}
-                <span className="hint">({tc.participantLimitHint})</span>
+                <span className="text-xs text-gray-400">({tc.participantLimitHint})</span>
               </label>
               <input
                 id="limit"
@@ -185,13 +193,14 @@ export default function CreatePage() {
                 value={participantLimit}
                 onChange={(e) => setParticipantLimit(e.target.value)}
                 placeholder={tc.limitPlaceholder}
+                className={inputCls}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="line">
+            <div className="mb-4">
+              <label htmlFor="line" className={labelCls}>
                 {tc.lineGroupUrl}{" "}
-                <span className="hint">({tc.lineGroupUrlHint})</span>
+                <span className="text-xs text-gray-400">({tc.lineGroupUrlHint})</span>
               </label>
               <input
                 id="line"
@@ -199,16 +208,14 @@ export default function CreatePage() {
                 value={lineGroupUrl}
                 onChange={(e) => setLineGroupUrl(e.target.value)}
                 placeholder={tc.linePlaceholder}
+                className={inputCls}
               />
-              <p className="hint" style={{ marginTop: "0.375rem", color: "#b45309" }}>
-                {tc.lineGroupUrlDisclaimer}
-              </p>
+              <p className="text-xs mt-1.5 text-amber-700">{tc.lineGroupUrlDisclaimer}</p>
             </div>
 
             <button
               type="submit"
-              className="btn btn-primary"
-              style={{ width: "100%", marginTop: "0.5rem" }}
+              className={btnPrimary + " w-full mt-2"}
               disabled={loading}
             >
               {loading ? tc.submittingButton : tc.submitButton}

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getEventBySlug, countRsvps } from "@/lib/db";
+import { getEventBySlug, countRsvps, getRsvps } from "@/lib/db";
 
 export async function GET(
   _request: NextRequest,
@@ -12,12 +12,16 @@ export async function GET(
     return NextResponse.json({ error: "Event not found" }, { status: 404 });
   }
 
-  const current_rsvp_count = await countRsvps(event.id);
+  const [current_rsvp_count, participants] = await Promise.all([
+    countRsvps(event.id),
+    getRsvps(event.id),
+  ]);
 
   return NextResponse.json({
     name: event.name,
     description: event.description,
     participant_limit: event.participant_limit,
     current_rsvp_count,
+    participants,
   });
 }

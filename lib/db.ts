@@ -52,6 +52,16 @@ export async function countRsvps(eventId: string): Promise<number> {
   return result?.count ?? 0;
 }
 
+/** Fetch all RSVPs for a given event, ordered by sign-up time */
+export async function getRsvps(eventId: string): Promise<Pick<Rsvp, "name" | "created_at">[]> {
+  const result = await env.DB.prepare(
+    "SELECT name, created_at FROM rsvps WHERE event_id = ? ORDER BY created_at ASC"
+  )
+    .bind(eventId)
+    .all<Pick<Rsvp, "name" | "created_at">>();
+  return result.results ?? [];
+}
+
 /** Insert a new event */
 export async function insertEvent(event: {
   id: string;

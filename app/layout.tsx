@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="bg-gray-50 text-gray-900">
+      <body className="min-h-screen flex flex-col items-center px-4 py-8">
         <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>
