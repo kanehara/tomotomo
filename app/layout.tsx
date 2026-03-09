@@ -5,6 +5,9 @@ import { LocaleProvider } from "@/lib/LocaleContext";
 export const metadata: Metadata = {
   title: "tomotomo — Event RSVP",
   description: "Create events, share QR codes, and collect RSVPs",
+  other: {
+    "google-adsense-account": "ca-pub-1019145143777976",
+  },
 };
 
 export default function RootLayout({
