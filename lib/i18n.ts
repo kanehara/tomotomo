@@ -76,6 +76,15 @@ export const translations = {
         title: "Attendees",
         empty: "No one has RSVPed yet — be the first!",
       },
+      flyer: {
+        link: "🖨 Print Flyer",
+        printButton: "Print Flyer",
+        scanToRsvp: "Scan to RSVP",
+        rsvpAt: "RSVP at:",
+        spots: "Spots available:",
+        loading: "Loading flyer…",
+        backToEvent: "← Back to event",
+      },
     },
   },
   ja: {
@@ -155,6 +164,15 @@ export const translations = {
       participants: {
         title: "参加者",
         empty: "まだ参加登録者がいません — 最初に登録しましょう！",
+      },
+      flyer: {
+        link: "🖨 フライヤーを印刷",
+        printButton: "フライヤーを印刷",
+        scanToRsvp: "QRコードをスキャンして参加登録",
+        rsvpAt: "参加登録URL:",
+        spots: "参加可能人数:",
+        loading: "フライヤーを読み込み中…",
+        backToEvent: "← イベントページに戻る",
       },
     },
   },

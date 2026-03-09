@@ -254,6 +254,16 @@ export default function EventPage({
               </a>
             </div>
           )}
+
+          {/* ── Print flyer link ───────────────────────────────────────────── */}
+          <div className="mt-4 text-center">
+            <Link
+              href={`/e/${slug}/flyer`}
+              className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              {te.flyer.link}
+            </Link>
+          </div>
         </div>
       </div>
     </>

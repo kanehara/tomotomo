@@ -105,6 +105,12 @@ export default function CreatePage() {
               >
                 {tc.success.openButton}
               </a>
+              <a
+                href={`${result.event_url}/flyer`}
+                className="flex items-center justify-center px-5 py-2.5 rounded-lg text-base font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                {t.event.flyer.link}
+              </a>
             </div>
 
             {/* QR code */}
